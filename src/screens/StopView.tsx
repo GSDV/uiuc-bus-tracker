@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { useEffect, useState, useContext } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { useRouter, useGlobalSearchParams } from 'expo-router';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -11,6 +11,13 @@ import IncomingBus from '@components/bus/IncomingBus';
 import BusExpression from '@components/BusExpression';
 
 import colorSelection from '@styles/Colors';
+
+import { findStopName, encodeStopName } from '@util/bus-lib/name';
+import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
+
+import { calcBackLink } from '@util/calcBack';
+
+import { NavContext } from '@util/contexts/nav/NavContext';
 
 
 
@@ -29,7 +36,6 @@ export default function StopView() {
         refresh(!refresher);
     }
 
-
     const initScreen = async () => {
         setIsLoading(true);
         const data = await fetchStopDepartures(id);
@@ -45,7 +51,7 @@ export default function StopView() {
     return (
     <>
         <Header name={nameParam} refreshView={refreshView} />
-        {mtdDown ? <BusExpression img='mtd-down' msg='The MTD Bus API is currently down. Please check back later.' /> : <Departures isLoading={isLoading} deps={deps} loc={loc} />}
+        {mtdDown ? <BusExpression img='dead' msg='The MTD Bus API is currently down. Please check back later.' /> : <Departures isLoading={isLoading} deps={deps} loc={loc} />}
     </>
     );
 }
@@ -59,7 +65,7 @@ function Departures({isLoading, deps, loc}) {
         {!isLoading &&
             <ScrollView contentContainerStyle={{display: 'flex', alignItems: 'center', gap: 15, padding: 10}}>
                 {deps.length==0 ?
-                    <BusExpression img='no-deps' msg='No departures for the next hour.' />
+                    <BusExpression img='sad' msg='No departures for the next hour.' />
                 :
                     <>{deps.map((dep, i) => { return <Departure key={i} dep={dep} loc={loc} />; })}</>
                 }
@@ -74,36 +80,46 @@ function Departures({isLoading, deps, loc}) {
 function Departure({dep, loc}) {
     const router = useRouter();
 
+    const slmContext = useContext(StopListManagerContext);
+    const stopsList = slmContext.slm.list;
+
+    const point = findStopName(dep.stop_id, stopsList);
+
     const busData = {
         headsign: dep.headsign,
         color: dep.route.route_color,
         route_id: dep.route.route_id,
+        vehicle_id: dep.vehicle_id,
         shape_id: dep.trip.shape_id,
         dir: dep.trip.direction
     }
 
     const stopData = {
+        name: encodeStopName(point),
         latitude: loc.lat,
         longitude: loc.lon
     }
 
     return (
-        <Pressable onPress={() => router.push(`/stop/route?stopDataParam=${JSON.stringify(stopData)}&busDataParam=${JSON.stringify(busData)}`)}>
-            <IncomingBus dep={dep} />
-        </Pressable>
+        <TouchableOpacity onPress={() => router.push(`/stop/route?stopDataParam=${JSON.stringify(stopData)}&busDataParam=${JSON.stringify(busData)}`)}>
+            <IncomingBus point={point} dep={dep} />
+        </TouchableOpacity>
     );
 }
 
 
 
 function Header({name, refreshView}: {name: string, refreshView: () => void}) {
+    const navContex = useContext(NavContext);
     const router = useRouter();
+
+    const goBack = () => router.navigate(calcBackLink(navContex.curr));
     
     return (
     <>
         <TopSafeArea />
         <View style={header_Styles.container}>
-            <HeaderButton icon='chevron-back' onPress={router.back} />
+            <HeaderButton icon='chevron-back' onPress={goBack} />
             <Text numberOfLines={1} style={header_Styles.title}>{name}</Text>
             <HeaderButton icon='refresh' onPress={refreshView} />
         </View>
@@ -113,15 +129,15 @@ function Header({name, refreshView}: {name: string, refreshView: () => void}) {
 
 function HeaderButton({icon, onPress}: {icon: string, onPress: () => void}) {
     return (
-        <Pressable onPress={onPress}>
+        <TouchableOpacity onPress={onPress}>
             <Ionicons name={icon as any} size={30} color={colorSelection.whiteSoft} />
-        </Pressable>
+        </TouchableOpacity>
     );
 }
 
 const header_Styles = StyleSheet.create({
     container: {
-        padding: 15,
+        padding: 20,
         backgroundColor: colorSelection.bluePrimary,
         display: 'flex',
         flexDirection: 'row',
