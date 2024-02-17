@@ -12,7 +12,7 @@ export default function App() {
     const router = useRouter();
 
     useFocusEffect(() => {
-      router.replace('/nav/all-stops');
+        router.replace('/nav/all-stops');
     });
     
     return <Text>Loading</Text>;

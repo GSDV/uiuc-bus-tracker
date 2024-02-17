@@ -1,4 +1,4 @@
-import AllStops from "@screens/AllStops";
+import AllStops from '@screens/AllStops';
 
 
 

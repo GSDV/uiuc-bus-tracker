@@ -1,7 +1,7 @@
-import StopView from "@screens/StopsView";
+import StopView from "@screens/StopView";
+
+
 
 export default function Favorites() {
-    return (
-        <StopView />
-    );
+    return <StopView />;
 }

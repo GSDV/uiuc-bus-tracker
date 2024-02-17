@@ -1,7 +1,9 @@
-import { Text } from "react-native";
+import Favorites from "@screens/Favorites";
 
-export default function Favorites() {
+
+
+export default function Index() {
     return (
-        <Text>dew</Text>
+        <Favorites />
     );
 }
