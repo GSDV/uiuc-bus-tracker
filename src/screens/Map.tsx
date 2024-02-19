@@ -1,34 +1,58 @@
-// // nearby
-// import { useEffect, useState } from 'react';
-// import { View, Text } from 'react-native';
-// import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
+import { useEffect, useState, useContext } from 'react';
+import { View } from 'react-native';
 
-// import { BusRouteMap } from '@util/bus-lib/map';
+import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
 
-// export default function Map() {
-//     const router = useRouter();
-//     const params = useLocalSearchParams();
-//     const { id, other } = params;
-//     // router.push({ pathname: "/", params: { post: "random", id, other } });
+import MapView, { Marker } from 'react-native-maps';
 
-//     // useEffect(() => {
-//     //     callAsyncFetch();
-//     // }, []); 
+import Header from '@components/Header';
 
-//     return (
-//         <View>
-            
-//         </View>
-//     )
-// }
+import StopMarkerSrc from '@assets/map-icons/mini-stop.png'
 
 
 
-// function EE() {
-    
-//     return (
-//         <View>
-//             <BusRouteMap shape_id={1} bus_locations={1} color={1} />
-//         </View>
-//     );
-// }
+export default function Map() {
+    const slmContext = useContext(StopListManagerContext);
+    const [stopsList, setStopsList] = useState([]);
+
+    useEffect(() => {
+        setStopsList(slmContext.slm.list);
+    }, [slmContext.isLoading]);
+
+    return (
+        <View style={{flex: 1}}>
+            <Header title='Bus Stops' />
+            <MapView
+                style={{flex: 1}} 
+                initialRegion={{ latitude: 40.11131, longitude: -88.24058, latitudeDelta: 0.2, longitudeDelta: 0.2 }} 
+                mapType='standard' 
+                showsUserLocation={true}
+            >
+                {stopsList.map((stop, i) => <StopMarker stopData={stop} i={i} />)}
+            </MapView>
+        </View>
+    );
+}
+
+
+
+function StopMarker({stopData, i}) {
+    const loc = {latitude: 0, longitude: 0};
+    for (let i=0; i<stopData.stop_points.length; i++) {
+        loc.latitude = loc.latitude + stopData.stop_points[i].stop_lat;
+        loc.longitude = loc.longitude + stopData.stop_points[i].stop_lon;
+    }
+    loc.latitude = loc.latitude / stopData.stop_points.length;
+    loc.longitude = loc.longitude / stopData.stop_points.length;
+
+    return (
+        <Marker 
+            key={`stop-${i}`} 
+            coordinate={loc} 
+            image={StopMarkerSrc} 
+            anchor={{x: 0.5, y: 1}} 
+            title={stopData.stop_name} 
+            tracksViewChanges={false}
+        />
+    );
+}
