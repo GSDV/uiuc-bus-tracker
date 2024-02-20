@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeArea from '@components/SafeArea';
-
-import nav_Styles from '@styles/Nav';
-import colorSelection from '@styles/Colors';
-
-import AllStopsSrc from '@assets/allstops.png';
-
 import { useRouter } from 'expo-router';
 
-import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
+import { NavContext } from '@util/contexts/nav/NavContext';
+
+import SafeArea from '@components/safearea/Full';
+
+import nav_styles from '@styles/Nav';
+import colorSelection from '@styles/Colors';
+
+import AllStopsSrc from '@assets/nav/all-stops.png';
+import NearbySrc from '@assets/nav/nearby.png';
+import FavoriteSrc from '@assets/nav/favorites.png';
+import TripPlannerSrc from '@assets/nav/trip-planner.png';
+import MapSrc from '@assets/nav/map.png';
 
 
 
-export default function Nav({ children }) {
-
+export default function Nav({children}) {
     return (
         <SafeArea>
             <View style={{flex: 1, backgroundColor: colorSelection.whiteSoft}}>
@@ -30,24 +31,26 @@ export default function Nav({ children }) {
 
 
 function NavBar() {
+    const navContext = useContext(NavContext);
     const router = useRouter();
 
-    const screenIcons = [
-        {img: AllStopsSrc, title: 'All Stops', link: '/nav/stops'},
-        {img: AllStopsSrc, title: 'Nearby', link: '/nav/'},
-        {img: AllStopsSrc, title: 'Favorites', link: '/nav/'},
-        {img: AllStopsSrc, title: 'Planner', link: '/nav/'},
-        {img: AllStopsSrc, title: 'Map', link: '/nav/'}
+    const navScreens = [
+        {img: AllStopsSrc, title: 'Stops', link: '/nav/all-stops'},
+        {img: NearbySrc, title: 'Nearby', link: '/nav/nearby'},
+        {img: FavoriteSrc, title: 'Favorites', link: '/nav/favorites'},
+        {img: TripPlannerSrc, title: 'Planner', link: '/nav/trip-planner'},
+        {img: MapSrc, title: 'Map', link: '/nav/map'}
     ];
 
+    const setScreen = (i) => {
+        navContext.updateCurr(i);
+        router.replace(navScreens[i].link);
+    }
+
     return (
-        <View style={nav_Styles.bar}>
-            { screenIcons.map((icon, i) => {
-                return (
-                    <TouchableOpacity key={i} onPress={() => router.push(icon.link)}>
-                        <NavItem icon={icon} />
-                    </TouchableOpacity>
-                );
+        <View style={nav_styles.bar}>
+            { navScreens.map((screen, i) => {
+                return <NavItem key={i} screen={screen} selected={navContext.curr==i} setScreen={() => setScreen(i)} />;
             })}
         </View>
     );
@@ -55,16 +58,22 @@ function NavBar() {
 
 
 
-function NavItem({ icon }) {
-    // const color = selected ? colorSelection.bluePrimary : colorSelection.orangePrimary;
-    const color = colorSelection.bluePrimary;
+interface NavItemType {
+    screen: {
+        img: any,
+        title: string,
+        link: string
+    },
+    selected: boolean,
+    setScreen: () => void
+}
+function NavItem({screen, selected, setScreen}: NavItemType) {
+    const opacity = (selected) ? 1 : 0.5;
 
     return (
-        <View style={[ nav_Styles.item, {backgroundColor: color} ]}>
-            <Image style={{width: 50, height: 50}} source={icon.img} />
-            <Text style={nav_Styles.itemTitle}>{icon.title}</Text>
-        </View>
+        <TouchableOpacity style={[ nav_styles.item, {opacity: opacity} ]} onPress={setScreen}>
+            <Image style={{width: 60, height: 60}} source={screen.img} />
+            <Text style={nav_styles.itemTitle}>{screen.title}</Text>
+        </TouchableOpacity>
     );
 }
-
-
