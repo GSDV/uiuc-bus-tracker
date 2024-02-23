@@ -1,4 +1,4 @@
-import Nearby from "@screens/Nearby";
+import Nearby from '@screens/Nearby';
 
 
 

@@ -4,7 +4,6 @@ import { Svg, Circle, G } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
 
 import colorSelection from '@styles/Colors';
-
 import headerButton_styles from '@styles/HeaderButton';
 
 

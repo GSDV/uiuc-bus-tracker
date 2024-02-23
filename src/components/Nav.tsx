@@ -4,10 +4,10 @@ import { useRouter } from 'expo-router';
 
 import { NavContext } from '@util/contexts/nav/NavContext';
 
-import SafeArea from '@components/safearea/Full';
-
-import nav_styles from '@styles/Nav';
 import colorSelection from '@styles/Colors';
+import nav_styles from '@styles/Nav';
+
+import SafeArea from '@components/safearea/Full';
 
 import AllStopsSrc from '@assets/nav/all-stops.png';
 import NearbySrc from '@assets/nav/nearby.png';

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { View, Text, Pressable, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useRouter, useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
+import { View, TouchableOpacity } from 'react-native';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MapView, { Polyline, Marker } from 'react-native-maps';
 
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { getRoutePoints, getRouteBusLocation } from '@util/bus-lib/map';
-
 
 import colorSelection from '@styles/Colors';
 
@@ -43,9 +42,6 @@ export default function RouteView() {
         setRoutePoints(routePointsData);
         setBusLocation(busLocationData);
     }
-
-
-    
 
     useEffect(() => {
         initScreen();
@@ -96,9 +92,6 @@ function BackButton() {
 
 
 
-
-
-
 function RouteLine({routePoints, color}) {
     return (
         <Polyline 
@@ -134,12 +127,3 @@ function StopMarker({stopData}) {
         />
     );
 }
-
-
-
-
-
-
-
-
-

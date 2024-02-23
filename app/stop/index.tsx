@@ -1,4 +1,4 @@
-import StopView from "@screens/StopView";
+import StopView from '@screens/StopView';
 
 
 

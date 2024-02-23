@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Text, Image, View, TouchableOpacity } from 'react-native';
 
-import stop_Styles from '@styles/Stop';
+import { FavoriteManagerContext } from '@util/contexts/favorites/FavoritesManagerContext';
 
-import { FavoriteManagerContext } from '@util/favorites/FavoritesManagerContext';
+import stop_Styles from '@styles/Stop';
 
 import StarEmptySrc from '@assets/star/empty.png';
 import StarFilledSrc from '@assets/star/filled.png';
@@ -12,17 +12,26 @@ import StarFilledSrc from '@assets/star/filled.png';
 
 interface StopType {
     id: string,
-    name: string
+    name: string,
+    loc: {
+        lat: number;
+        lon: number;
+    }
 }
-export default function Stop({id, name}: StopType) {
+export default function Stop({id, name, loc}: StopType) {
     const favContext = useContext(FavoriteManagerContext);
 
     const [isFaved, setIsFaved] = useState(favContext.fm.isFavorited(id));
     const starIcon = isFaved ? StarFilledSrc : StarEmptySrc;
 
     const toggleFavorite = () => {
+        const stopParam = {
+            stop_id: id,
+            stop_name: name,
+            loc: loc
+        }
         if (isFaved) favContext.fm.removeFavorite(id);
-        else favContext.fm.addFavorite(id, name);
+        else favContext.fm.addFavorite(stopParam);
         setIsFaved(!isFaved);
     }
 

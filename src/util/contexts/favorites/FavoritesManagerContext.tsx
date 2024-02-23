@@ -1,19 +1,23 @@
-import React, { createContext, useState, useEffect } from 'react';
-import FavoritesManager from '@util/favorites/manager';
+import { createContext, useState, useEffect } from 'react';
+import FavoritesManager from '@util/contexts/favorites/manager';
 
 
-const FavoriteManagerContext = createContext({pm: new FavoritesManager([]), saveFavorites: () => {}});
+
+const FavoriteManagerContext = createContext({fm: new FavoritesManager([]), saveFavorites: () => {}, isLoading: true});
 
 const FavoritesManagerProvider = (prop) => {
     const [fm, updateFM] = useState(new FavoritesManager([]));
+    const [isLoading, setIsLoading] = useState(true);
 
 
     useEffect(() => {
-        const getAsync = async () => {
+        const init = async () => {
+            setIsLoading(true);
             await fm.retrieve();
             updateFM(new FavoritesManager(fm.favorites));
+            setIsLoading(false);
         }
-        getAsync();
+        init();
     }, []);
 
     const saveFavorites = async () => {
@@ -22,7 +26,7 @@ const FavoritesManagerProvider = (prop) => {
     }
 
     return (
-    <FavoriteManagerContext.Provider value={{ fm, saveFavorites }}>
+    <FavoriteManagerContext.Provider value={{ fm, saveFavorites, isLoading }}>
         {prop.children}
     </FavoriteManagerContext.Provider>
     );

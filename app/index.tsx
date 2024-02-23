@@ -1,5 +1,7 @@
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
+
+import { BusExpression } from '@components/BusExpression';
 
 
 
@@ -15,5 +17,9 @@ export default function App() {
         router.replace('/nav/all-stops');
     });
     
-    return <Text>Loading</Text>;
+    return (
+        <View style={{flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <BusExpression img='loading' msg='Loading...' />
+        </View>
+    );
 }

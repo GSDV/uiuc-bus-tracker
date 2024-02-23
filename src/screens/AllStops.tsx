@@ -33,7 +33,7 @@ function SearchBar({stopsList, setStopsList}) {
 
     const onSearch = (term) => {
         const filteredStops = stopsList.filter((stop) => {
-            return stop.stop_name.includes(term);
+            return stop.stop_name.toLowerCase().includes(term.toLowerCase());
         });
         setStopsList(filteredStops);
     }

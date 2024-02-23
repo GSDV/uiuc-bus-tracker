@@ -57,9 +57,7 @@ export default function TripPlanner() {
 
 
     const addMarker = (event: MapPressEvent) => {
-        // if (instr!=0 && instr!=1) return;
         const coords = event.nativeEvent.coordinate;
-        console.log(coords)
         if (coords.latitude>=40.2 || coords.latitude<=39.9 || coords.longitude>=-88.0 || coords.longitude<=-88.4) {
             displayError('Pick a point closer to Champaing-Urbana area');
             return;
@@ -134,14 +132,6 @@ function Error({msg, timer, errFade}) {
         </View>
     )
 }
-
-
-
-
-
-
-
-
 
 
 

@@ -1,4 +1,5 @@
 import { Slot } from 'expo-router';
+
 import { StopListManagerProvider } from '@util/contexts/stops/StopListContext';
 import { FavoritesManagerProvider } from '@util/contexts/favorites/FavoritesManagerContext';
 import { NearbyProvider } from '@util/contexts/nearby/NearbyContext';

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "UIUCBusTracker",
+    "name": "UIUC Bus Tracker",
     "slug": "UIUCBusTracker",
-    "scheme": "",
+    "scheme": "gsdv-uiuc-bus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "infoPlist": {
+        "CFBundleDisplayName": "UIUC Bus",
+        "NSLocationWhenInUseUsageDescription": "This app needs to get your location to give you nearby stops."
+      },
+      "supportsTablet": false,
+      "bundleIdentifier": "me.gsdv.UIUC",
+      "buildNumber": "8.0.0"
     },
     "android": {
       "adaptiveIcon": {

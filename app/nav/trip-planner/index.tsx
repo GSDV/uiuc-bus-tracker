@@ -1,4 +1,4 @@
-import TripPlanner from "@screens/TripPlanner";
+import TripPlanner from '@screens/TripPlanner';
 
 
 

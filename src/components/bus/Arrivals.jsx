@@ -1,6 +1,6 @@
 import { ScrollView, Touchable } from 'react-native';
-import IncomingBus from '@components/bus/IncomingBus';
 import { useRouter } from 'expo-router';
+import IncomingBus from '@components/bus/IncomingBus';
 
 
 
@@ -13,12 +13,7 @@ export default function ArrivalsList(stop, deps) {
 }
 
 
-/**
- * Creates all bus arrivals for a given stop.
- * @param {JSON} stop - Parent stop
- * @param {array} deps - All incoming departures from a stop
- * @returns {JSX} - JSX list of all incomoing departures
- */
+
 function Arrivals({stop, deps}) {
     const router = useRouter();
 
