@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { FavoriteManagerContext } from '@util/contexts/favorites/FavoritesManagerContext';
 
-import Header from '@components/Header';
+import { Header } from '@components/NavHeader';
 import StopsList from '@components/stops/StopsList';
 
 

@@ -6,7 +6,7 @@ import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
 import { Marker } from 'react-native-maps';
 import MapView from 'react-native-map-clustering';
 
-import Header from '@components/Header';
+import { Header } from '@components/NavHeader';
 
 import StopMarkerSrc from '@assets/map-icons/mini-stop.png'
 import colorSelection from '@styles/Colors';

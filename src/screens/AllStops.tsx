@@ -3,9 +3,10 @@ import { TextInput } from 'react-native';
 
 import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
 
+import colorSelection from '@styles/Colors';
+
 import StopsList from '@components/stops/StopsList';
 
-import colorSelection from '@styles/Colors';
 
 
 

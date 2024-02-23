@@ -3,9 +3,9 @@ import { View } from 'react-native';
 
 import { NearbyContext } from '@util/contexts/nearby/NearbyContext';
 
-import Header from '@components/Header';
+import { Header } from '@components/NavHeader';
+import { BusExpression } from '@components/BusExpression';
 import StopsList from '@components/stops/StopsList';
-import BusExpression from '@components/BusExpression';
 
 
 

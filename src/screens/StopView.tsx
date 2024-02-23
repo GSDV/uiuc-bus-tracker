@@ -8,7 +8,7 @@ import { fetchStopDepartures } from '@util/bus-lib/stop';
 
 import TopSafeArea from '@components/safearea/Top';
 import IncomingBus from '@components/bus/IncomingBus';
-import BusExpression from '@components/BusExpression';
+import { BusExpression } from '@components/BusExpression';
 
 import colorSelection from '@styles/Colors';
 
@@ -18,6 +18,8 @@ import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
 import { calcBackLink } from '@util/calcBack';
 
 import { NavContext } from '@util/contexts/nav/NavContext';
+
+import { Header, HeaderButtonType } from '@components/Header';
 
 
 
@@ -50,10 +52,25 @@ export default function StopView() {
 
     return (
     <>
-        <Header name={nameParam} refreshView={refreshView} />
+        {/* <Header name={nameParam} refreshView={refreshView} /> */}
+        <StopViewHeader name={nameParam} refreshView={refreshView} />
         {mtdDown ? <BusExpression img='dead' msg='The MTD Bus API is currently down. Please check back later.' /> : <Departures isLoading={isLoading} deps={deps} loc={loc} />}
     </>
     );
+}
+
+
+
+
+function StopViewHeader({name, refreshView}: {name: string, refreshView: () => void}) {
+    const navContex = useContext(NavContext);
+    const router = useRouter();
+    const goBack = () => router.navigate(calcBackLink(navContex.curr));
+
+    const leftButton: HeaderButtonType = {icon: 'chevron-back', onPress: goBack};
+    const rightButton: HeaderButtonType = {icon: 'refresh', onPress: refreshView};
+
+    return <Header title={name} leftButton={leftButton} rightButton={rightButton} />;
 }
 
 
@@ -109,7 +126,7 @@ function Departure({dep, loc}) {
 
 
 
-function Header({name, refreshView}: {name: string, refreshView: () => void}) {
+function OHeader({name, refreshView}: {name: string, refreshView: () => void}) {
     const navContex = useContext(NavContext);
     const router = useRouter();
 

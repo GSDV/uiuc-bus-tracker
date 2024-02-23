@@ -7,18 +7,11 @@ import MapView, { Polyline, Marker } from 'react-native-maps';
 
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
-import { fetchStopDepartures } from '@util/bus-lib/stop';
 import { getRoutePoints, getRouteBusLocation } from '@util/bus-lib/map';
 
 
-import sleep from '@util/zzz';
-
 import colorSelection from '@styles/Colors';
 
-
-import BusExpression from '@components/BusExpression';
-
-import TopSafeArea from '@components/safearea/Top';
 
 import CooldownButton from '@components/CooldownButton';
 
@@ -63,7 +56,8 @@ export default function RouteView() {
             <MapView
                 style={{flex: 1}} 
                 initialRegion={{ latitude: stopData.latitude, longitude: stopData.longitude, latitudeDelta: 0.001, longitudeDelta: 0.001 }}
-                mapType='standard'
+                mapType='standard' 
+                showsUserLocation={true}
             >
                 <RouteLine routePoints={routePoints} color={`#${busData.color}`} />
                 <BusMarkers busLocation={busLocation} />
@@ -110,7 +104,7 @@ function RouteLine({routePoints, color}) {
         <Polyline 
             coordinates={routePoints} 
             strokeColor={color} 
-            strokeWidth={7}
+            strokeWidth={10}
         />
     );
 }
@@ -135,6 +129,7 @@ function StopMarker({stopData}) {
             key='stop-marker' 
             coordinate={stopData} 
             image={StopMarkerSrc} 
+            anchor={{x: 0.5, y: 1}} 
             title={stopData.name}
         />
     );
