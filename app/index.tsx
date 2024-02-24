@@ -8,7 +8,7 @@ import { BusExpression } from '@components/BusExpression';
 /**
  * What is going on here?
  * 
- * Check out the README.md, "Why aren't you using registerRootComponent?" part.
+ * Check out the README.md, "Whats going on with routing?" part.
  */
 export default function App() {
     const router = useRouter();
