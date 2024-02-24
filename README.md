@@ -1,7 +1,7 @@
 # UIUC Bus Tracker
 The perfect bus app for University of Illinois students! Look at any bus stop and all the routes. View the map and track buses around campus. Plan trips anywhere in Champaign-Urbana area. Star your favorite bus stops and view ones nearby.
 
-<!-- <img src="https://github.com/GSDV/pola/blob/main/assets/thumbnail.png" alt="Homepage" style="width:100%;"/> -->
+<img src="https://github.com/GSDV/uiuc-bus-tracker/blob/main/assets/thumbnail.png" alt="Thumbnail" style="width:100%;"/>
 
 ## App
 Coming to the App Store and Google Play Store soon!
