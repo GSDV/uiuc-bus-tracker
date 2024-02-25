@@ -5,6 +5,7 @@ import { FavoriteManagerContext } from '@util/contexts/favorites/FavoritesManage
 
 import { Header } from '@components/NavHeader';
 import StopsList from '@components/stops/StopsList';
+import { BusExpression } from '@components/BusExpression';
 
 
 
@@ -14,7 +15,13 @@ export default function Favorites() {
     return (
         <View style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
             <Header title='Favorites' />
-            <StopsList key={fmContext.isLoading.toString()} list={fmContext.fm.favorites}/>
+            {(fmContext.fm.favorites.length==0) ? 
+                <View style={{flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <BusExpression img='confused' msg='Add some favorites from "All Stops"'/>
+                </View>
+            :
+                <StopsList key={fmContext.isLoading.toString()} list={fmContext.fm.favorites}/>
+            }            
         </View>
     );
 }
