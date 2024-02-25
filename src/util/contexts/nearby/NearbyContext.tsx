@@ -32,8 +32,8 @@ const NearbyProvider = (prop) => {
                 } else {
                     const nearbyStops = await getNearbyStops(res.loc);
                     setStops(nearbyStops);
-                    setSuccessful(true);
                 }
+                setSuccessful(true);
             }
             setIsLoading(false);
         }
