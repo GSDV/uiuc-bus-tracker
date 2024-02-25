@@ -24,7 +24,7 @@ const getRouteBusLocation = async (vehicle_id) => {
         return {latitude: busLocation.lat, longitude: busLocation.lon};
     } catch (err) {
         console.error(err);
-        return {};
+        return {latitude: 0, longitude: 0};
     }
 }
 

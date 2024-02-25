@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import MapView, { Polyline, Marker } from 'react-native-maps';
-
 import { Ionicons } from '@expo/vector-icons';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getRoutePoints, getRouteBusLocation } from '@util/bus-lib/map';
 
 import colorSelection from '@styles/Colors';
-
-
-import CooldownButton from '@components/CooldownButton';
-
 import headerButton_styles from '@styles/HeaderButton';
 
+import MapView, { Polyline, Marker } from 'react-native-maps';
+
+import CooldownButton from '@components/CooldownButton';
 import StopMarkerSrc from '@assets/map-icons/stop.png'
 import BusMarkerSrc from '@assets/map-icons/bus.png'
+
 
 
 export default function RouteView() {
@@ -26,7 +23,7 @@ export default function RouteView() {
     const busData = JSON.parse(busDataParam as any);
 
     const [routePoints, setRoutePoints] = useState([]);
-    const [busLocation, setBusLocation] = useState({});
+    const [busLocation, setBusLocation] = useState({latitude: 0, longitude: 0});
 
     const fetchBusLocation = async () => {
         const busLocationData = await getRouteBusLocation(busData.vehicle_id);
@@ -56,7 +53,7 @@ export default function RouteView() {
                 showsUserLocation={true}
             >
                 <RouteLine routePoints={routePoints} color={`#${busData.color}`} />
-                <BusMarkers busLocation={busLocation} />
+                <BusMarker busLocation={busLocation} />
                 <StopMarker stopData={stopData} />
             </MapView>
             <Header fetchBusLocation={fetchBusLocation} />
@@ -104,7 +101,7 @@ function RouteLine({routePoints, color}) {
 
 
 
-function BusMarkers({busLocation}) {
+function BusMarker({busLocation}) {
     return (
         <Marker 
             key='bus-marker' 
