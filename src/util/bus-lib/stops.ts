@@ -2,11 +2,11 @@ import { REQ_URL, API_KEY } from '@util/env';
 
 
 
-const fetchAllStops = async () => {
-    const res = await fetch(`${REQ_URL}getstops?key=${API_KEY}`);
+const fetchAllStops = async (changeset_id) => {
+    const res = await fetch(`${REQ_URL}getstops?key=${API_KEY}&changeset_id=${changeset_id}`);
     if (!res.ok) return null;
     const data = await res.json();
-    return data.stops;
+    return data;
 }
 
 

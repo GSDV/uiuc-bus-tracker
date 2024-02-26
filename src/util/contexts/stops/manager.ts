@@ -1,5 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { REQ_URL, API_KEY } from '@util/env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetchAllStops } from '@util/bus-lib/stops';
 
 
 
@@ -37,8 +38,7 @@ export default class StopListManager {
             console.error('Error retrieving changeset_id:', err);
         }
 
-        const res = await fetch(`${REQ_URL}getstops?key=${API_KEY}&changeset_id=${this.changeset_id}`);
-        const data = await res.json();
+        const data = await fetchAllStops(this.changeset_id);
 
         // If we are getting new data:
         if (data.new_changeset) {
