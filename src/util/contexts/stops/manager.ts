@@ -1,4 +1,3 @@
-import { REQ_URL, API_KEY } from '@util/env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchAllStops } from '@util/bus-lib/stops';
 
