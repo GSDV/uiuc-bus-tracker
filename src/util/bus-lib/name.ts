@@ -8,7 +8,7 @@ function findStopName(stop_id: string, stopsCopy: any[]) {
 
         for (let j=0; j<point_stops.length; j++) {
             if (point_stops[j].stop_id == stop_id) {
-                return point_stops[j].stop_name
+                return point_stops[j].stop_name;
             }
         }
 

@@ -39,6 +39,12 @@ export default class StopListManager {
 
         const data = await fetchAllStops(this.changeset_id);
 
+        // API rate limit reached
+        if (data.status.code==403) {
+            this.list = [];
+            return;
+        }
+
         // If we are getting new data:
         if (data.new_changeset) {
             this.changeset_id = data.changeset_id;
@@ -56,7 +62,6 @@ export default class StopListManager {
                 console.error('Error retrieving stop list array:', err);
             }
         }
-        // console.log('Retrieved: ', this.list.length)
     }
 
 

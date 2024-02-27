@@ -43,7 +43,7 @@ export default function Plan() {
         if (res.code==500) {
             setBusExpression({
                 img: 'dead',
-                msg: 'There was a server error. Please try again later'
+                msg: res.msg
             });
         }
         if (res.code==455) {

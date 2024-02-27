@@ -9,7 +9,6 @@ import StopsList from '@components/stops/StopsList';
 
 
 
-
 export default function AllStops() {
     const slmContext = useContext(StopListManagerContext);
     const [stopsList, setStopsList] = useState(slmContext.slm.list);

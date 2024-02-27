@@ -20,6 +20,8 @@ const getItineraries = async (origin: LocationType, destination: LocationType, m
         const res = await fetch(`${REQ_URL}getplannedtripsbylatlon?key=${API_KEY}&origin_lat=${origin.latitude}&origin_lon=${origin.longitude}&destination_lat=${destination.latitude}&destination_lon=${destination.longitude}&minimize=${minimize}&max_walk=1`);
         const data = await res.json();
 
+        if (data.status.code==403) return {code: 500, msg: 'API limit reached. We are working as hard as possible to fix this.', itineraries: []}; // API rate limit reached
+
         response.msg = data.status.msg;
         response.itineraries = data.itineraries;
         response.code = (data.itineraries.length==0) ? 455 : 200;
