@@ -14,7 +14,7 @@ Run
  git clone https://github.com/GSDV/uiuc-bus-tracker.git
  npm install
  ```
-to get the code. Sign up for a free MTD API key [here](https://developer.cumtd.com/). Then add a file named "env.js" in "src/util/" directory. This is file, write the following:
+to get the code. Sign up for a free MTD API key [here](https://developer.cumtd.com/). Then add a file named "env.ts" in "src/util/" directory. This is file, write the following:
 ```js
 export const REQ_URL = "https://developer.cumtd.com/api/v2.2/json/";
 export const API_KEY = "YOUR API KEY";
