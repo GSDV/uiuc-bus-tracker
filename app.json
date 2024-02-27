@@ -21,7 +21,7 @@
         "NSLocationWhenInUseUsageDescription": "This app needs to get your location to give you nearby stops."
       },
       "supportsTablet": false,
-      "bundleIdentifier": "me.gsdv.UIUC",
+      "bundleIdentifier": "me.gsdv.UIUC-Bus",
       "buildNumber": "8.0.0"
     },
     "android": {
@@ -35,6 +35,14 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d8a85e43-ecc8-45e3-b995-113db50e93b2"
+      }
+    }
   }
 }
