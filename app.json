@@ -28,7 +28,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gabsdv.UIUCBusTracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
