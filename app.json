@@ -3,7 +3,7 @@
     "name": "UIUC Bus Tracker",
     "slug": "UIUCBusTracker",
     "scheme": "gsdv-uiuc-bus",
-    "version": "1.0.0",
+    "version": "10.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,7 @@
       },
       "supportsTablet": false,
       "bundleIdentifier": "me.gsdv.UIUC-Bus",
-      "buildNumber": "8.0.0"
+      "buildNumber": "10.0.0"
     },
     "android": {
       "adaptiveIcon": {
