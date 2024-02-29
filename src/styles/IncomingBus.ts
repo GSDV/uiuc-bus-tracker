@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'; 
 
+
+
 const ib_Styles = StyleSheet.create({
     item: {
         borderRadius: 10,
@@ -42,5 +44,7 @@ const ib_Styles = StyleSheet.create({
         fontSize: 18
     }
 });
+
+
 
 export default ib_Styles;

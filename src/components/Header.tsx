@@ -18,7 +18,6 @@ interface HeaderType {
     leftButton?: ButtonType,
     rightButton?: ButtonType
 }
-
 function Header({title, leftButton, rightButton}: HeaderType) {
     return (
     <>

@@ -202,7 +202,7 @@ function ItineraryItem({leg, isLast}: {leg: any, isLast: boolean}) {
                 </React.Fragment>
             ))}
             </React.Fragment>
-        )
+        );
     }
     // Shouldn't happen, but just in case:
     return <></>;

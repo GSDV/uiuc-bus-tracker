@@ -32,4 +32,4 @@ const header_styles = StyleSheet.create({
 
 
 
-export default header_styles
+export default header_styles;

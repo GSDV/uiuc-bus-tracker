@@ -19,7 +19,7 @@ export default class FavoritesManager {
         this.favorites = arr;
     }
 
-x
+
     async retrieve() {
         this.favorites = [];
         try {

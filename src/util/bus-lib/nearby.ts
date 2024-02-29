@@ -1,4 +1,4 @@
-import { REQ_URL, API_KEY } from '@util/env';
+import { REQ_URL, API_KEY } from '../env';
 
 
 

@@ -25,7 +25,7 @@ export default function StopsList({list}) {
     useEffect(() => {
         setDisplayedStops(list);
         setDSPage(1);
-    }, [list.length])
+    }, [list.length]);
 
     return (
         <FlatList 

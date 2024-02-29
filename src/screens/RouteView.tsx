@@ -12,14 +12,14 @@ import headerButton_styles from '@styles/HeaderButton';
 import MapView, { Polyline, Marker } from 'react-native-maps';
 
 import CooldownButton from '@components/CooldownButton';
-import StopMarkerSrc from '@assets/map-icons/stop.png'
-import BusMarkerSrc from '@assets/map-icons/bus.png'
+import StopMarkerSrc from '@assets/map-icons/stop.png';
+import BusMarkerSrc from '@assets/map-icons/bus.png';
 
 
 
 export default function RouteView() {
     const { stopDataParam, busDataParam } = useLocalSearchParams();
-    const stopData = JSON.parse(stopDataParam as any)
+    const stopData = JSON.parse(stopDataParam as any);
     const busData = JSON.parse(busDataParam as any);
 
     const [routePoints, setRoutePoints] = useState([]);

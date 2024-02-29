@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter, useGlobalSearchParams } from 'expo-router';
 
 import { fetchStopDepartures } from '@util/bus-lib/stop';

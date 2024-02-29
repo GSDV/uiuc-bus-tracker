@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import colorSelection from '@styles/Colors';
 
+
+
 const headerButton_styles = StyleSheet.create({
     container: {
         position: 'absolute',
@@ -21,5 +23,7 @@ const headerButton_styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
+
+
 
 export default headerButton_styles;

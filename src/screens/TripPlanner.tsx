@@ -3,13 +3,11 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import MapView, { Marker } from 'react-native-maps';
-
 import { MapPressEvent } from 'react-native-maps';
 
 import tripPlanner_styles from '@styles/TripPlanner';
 
 import { Header } from '@components/NavHeader';
-
 
 import StartMarkerSrc from '@assets/map-icons/stop.png'
 import EndMarkerSrc from '@assets/map-icons/blue-stop.png'
@@ -44,7 +42,7 @@ export default function TripPlanner() {
     const updateTimer = (prevTimer) => {
         if (prevTimer > 0) return prevTimer - 0.01;
         clearInterval(errTimerRef.current);
-        setErrShown(false)
+        setErrShown(false);
         return errFade;
     }
 
@@ -108,7 +106,7 @@ function InstructionButton({title, onPress}: {title: string, onPress: ()=>void})
         <TouchableOpacity onPress={onPress} style={[tripPlanner_styles.instrButtonContainer, pos]}>
             <Text style={tripPlanner_styles.instrButtonText}>{title}</Text>
         </TouchableOpacity>
-    )
+    );
 }
 
 
@@ -130,7 +128,7 @@ function Error({msg, timer, errFade}) {
         <View style={[tripPlanner_styles.errButton, {opacity: (timer/(errFade/2))}]}>
             <Text style={tripPlanner_styles.errText}>{msg}</Text>
         </View>
-    )
+    );
 }
 
 

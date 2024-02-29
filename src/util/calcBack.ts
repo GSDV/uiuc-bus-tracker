@@ -12,4 +12,4 @@ const calcBackLink = (i) => {
 
 
 
-export { calcBackLink }
+export { calcBackLink };
