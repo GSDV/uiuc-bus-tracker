@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
-import { TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useRouter, useGlobalSearchParams } from 'expo-router';
 
 import { fetchStopDepartures } from '@util/bus-lib/stop';
 import { findStopName, encodeStopName } from '@util/bus-lib/name';
 import { calcBackLink } from '@util/calcBack';
+import { setBusNotification } from '@util/notification';
 
 import { NavContext } from '@util/contexts/nav/NavContext';
 import { StopListManagerContext } from '@util/contexts/stops/StopListContext';
@@ -75,7 +76,10 @@ function Departures({isLoading, deps, loc}) {
                 {deps.length==0 ?
                     <BusExpression img='sad' msg='No departures for the next hour.' />
                 :
-                    <>{deps.map((dep, i) => { return <Departure key={i} dep={dep} loc={loc} />; })}</>
+                    <>
+                        <Text style={{padding: 5, fontSize: 15, textAlign: 'center'}}>Press a departure to see it on the map.{"\n"}Hold down to get notified when the bus arrives.</Text>
+                        {deps.map((dep, i) => { return <Departure key={i} dep={dep} loc={loc} />; })}
+                    </>
                 }
             </ScrollView>
         }
@@ -108,9 +112,19 @@ function Departure({dep, loc}) {
         longitude: loc.lon
     }
 
+
+    const askNotificationAlert = () => {
+        Alert.alert('Get Notified?', 'Would you like to be notified when this bus arrives?', [
+            { text: 'OK', onPress: () => setBusNotification(dep.headsign, new Date(dep.expected)) },
+            { text: 'Cancel', style: 'cancel' }
+        ]);
+    }
+
     return (
-        <TouchableOpacity onPress={() => router.push(`/stop/route?stopDataParam=${JSON.stringify(stopData)}&busDataParam=${JSON.stringify(busData)}`)}>
-            <IncomingBus point={point} dep={dep} />
+        <TouchableOpacity 
+            onPress={() => router.push(`/stop/route?stopDataParam=${JSON.stringify(stopData)}&busDataParam=${JSON.stringify(busData)}`)} 
+            onLongPress={() => askNotificationAlert()}>
+            <IncomingBus dep={dep} point={point} />
         </TouchableOpacity>
     );
 }

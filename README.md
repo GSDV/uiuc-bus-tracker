@@ -4,7 +4,10 @@ The perfect bus app for University of Illinois students! Look at any bus stop an
 <img src="https://github.com/GSDV/uiuc-bus-tracker/blob/main/assets/thumbnail.png" alt="Thumbnail" style="width:100%;"/>
 
 ## App
-Rejected from the App Store for being too similar to other U of I bus apps :/
+Coming to the App Store and Google Play Store soon!
+<!-- Click [here](https://apps.apple.com/us/app/pola-video/id6474945344) to view the app on the App Store. -->
+<!-- 
+Rejected from the App Store for being too similar to other U of I bus apps :/ -->
 
 
 ## Setup
